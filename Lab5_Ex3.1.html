@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Công Nghệ Số Trong Học Tập</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at 20% 20%, #263f9b 0%, transparent 30%),
+                radial-gradient(circle at 80% 70%, #7026a8 0%, transparent 30%),
+                #080d29;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* =========================
+           TEXT NỔI TRANG TRÍ
+        ========================= */
+
+        .floating-text {
+            position: fixed;
+            font-weight: bold;
+            opacity: 0.12;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatText 8s ease-in-out infinite;
+        }
+
+        .floating-text.one {
+            top: 15%;
+            left: 3%;
+            font-size: 45px;
+        }
+
+        .floating-text.two {
+            top: 55%;
+            right: 3%;
+            font-size: 35px;
+            animation-delay: 2s;
+        }
+
+        .floating-text.three {
+            bottom: 10%;
+            left: 10%;
+            font-size: 28px;
+            animation-delay: 4s;
+        }
+
+        @keyframes floatText {
+            0%, 100% {
+                transform: translateY(0) rotate(-3deg);
+            }
+
+            50% {
+                transform: translateY(-25px) rotate(3deg);
+            }
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            position: relative;
+            z-index: 2;
+            min-height: 330px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+            padding: 50px 20px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(67, 97, 238, 0.95),
+                    rgba(93, 48, 170, 0.9)
+                );
+
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+            top: -300px;
+            left: -100px;
+        }
+
+        header::after {
+            content: "";
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: rgba(0,220,255,0.12);
+            right: -100px;
+            bottom: -250px;
+        }
+
+        .badge {
+            position: relative;
+            z-index: 2;
+
+            padding: 10px 22px;
+            border-radius: 50px;
+
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.35);
+
+            backdrop-filter: blur(10px);
+
+            font-size: 15px;
+            letter-spacing: 1px;
+
+            margin-bottom: 20px;
+
+            transition: 0.3s;
+        }
+
+        .badge:hover {
+            transform: scale(1.08);
+            background: rgba(255,255,255,0.25);
+        }
+
+        header h1 {
+            position: relative;
+            z-index: 2;
+
+            margin: 0;
+
+            font-size: clamp(40px, 7vw, 80px);
+
+            background: linear-gradient(
+                90deg,
+                white,
+                #b7f0ff,
+                white
+            );
+
+            background-size: 200% auto;
+
+            color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
+
+            animation: shine 4s linear infinite;
+
+            text-shadow:
+                0 0 30px rgba(255,255,255,0.25);
+        }
+
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        header p {
+            position: relative;
+            z-index: 2;
+
+            max-width: 800px;
+
+            font-size: 18px;
+            line-height: 1.7;
+
+            color: #e5ebff;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        main {
+            position: relative;
+            z-index: 1;
+
+            max-width: 1250px;
+            margin: auto;
+
+            padding: 70px 25px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #b9c3e8;
+        }
+
+        /* =========================
+           CARDS
+        ========================= */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 70px;
+        }
+
+        .card {
+            position: relative;
+
+            padding: 30px;
+
+            min-height: 230px;
+
+            border-radius: 25px;
+
+            background: rgba(255,255,255,0.07);
+
+            border: 1px solid rgba(255,255,255,0.12);
+
+            backdrop-filter: blur(15px);
+
+            overflow: hidden;
+
+            transition:
+                transform 0.4s ease,
+                box-shadow 0.4s ease,
+                border-color 0.4s ease;
+        }
+
+        .card::before {
+            content: "";
+
+            position: absolute;
+
+            width: 180px;
+            height: 180px;
+
+            border-radius: 50%;
+
+            background: var(--card-color);
+
+            filter: blur(80px);
+
+            opacity: 0.25;
+
+            right: -70px;
+            top: -70px;
+
+            transition: 0.4s;
+        }
+
+        .card:hover {
+            transform: translateY(-12px) scale(1.02);
+
+            border-color: rgba(255,255,255,0.4);
+
+            box-shadow:
+                0 20px 60px rgba(0,0,0,0.35),
+                0 0 30px var(--card-color);
+        }
+
+        .card:hover::before {
+            opacity: 0.5;
+            transform: scale(1.4);
+        }
+
+        .icon {
+            width: 65px;
+            height: 65px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 18px;
+
+            background: var(--card-color);
+
+            font-size: 30px;
+
+            margin-bottom: 20px;
+
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+
+            transition: 0.4s;
+        }
+
+        .card:hover .icon {
+            transform: rotate(8deg) scale(1.15);
+        }
+
+        .card h3 {
+            font-size: 23px;
+            margin: 0 0 12px;
+        }
+
+        .card p {
+            color: #ccd4f4;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .blue {
+            --card-color: #21b8ff;
+        }
+
+        .orange {
+            --card-color: #ff8a00;
+        }
+
+        .green {
+            --card-color: #25d995;
+        }
+
+        /* =========================
+           INFOGRAPHIC
+        ========================= */
+
+        .infographic-section {
+            margin-bottom: 80px;
+        }
+
+        .image-box {
+            position: relative;
+
+            padding: 15px;
+
+            border-radius: 25px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(54, 106, 255, 0.5),
+                    rgba(170, 50, 255, 0.4)
+                );
+
+            box-shadow:
+                0 25px 80px rgba(0,0,0,0.4);
+
+            transition: 0.5s;
+        }
+
+        .image-box:hover {
+            transform: translateY(-8px);
+
+            box-shadow:
+                0 30px 90px rgba(52, 120, 255, 0.35);
+        }
+
+        .image-box img {
+            display: block;
+
+            width: 100%;
+            height: auto;
+
+            border-radius: 15px;
+
+            transition: 0.6s;
+        }
+
+        .image-box:hover img {
+            transform: scale(1.015);
+        }
+
+        .image-label {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+
+            padding: 10px 18px;
+
+            border-radius: 50px;
+
+            background: rgba(0,0,0,0.65);
+
+            backdrop-filter: blur(10px);
+
+            font-weight: bold;
+
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        /* =========================
+           VIDEO
+        ========================= */
+
+        .video-section {
+            text-align: center;
+        }
+
+        .video-container {
+            position: relative;
+
+            max-width: 950px;
+
+            margin: 40px auto 0;
+
+            padding: 10px;
+
+            border-radius: 25px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #1b9eff,
+                    #743cff,
+                    #ff39a7
+                );
+
+            background-size: 300% 300%;
+
+            animation: gradientMove 7s ease infinite;
+
+            box-shadow:
+                0 25px 80px rgba(0,0,0,0.45);
+        }
+
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .video-inner {
+            background: #050817;
+
+            border-radius: 18px;
+
+            padding: 8px;
+        }
+
+        iframe {
+            display: block;
+
+            width: 100%;
+            aspect-ratio: 16 / 9;
+
+            border: none;
+
+            border-radius: 12px;
+        }
+
+        /* =========================
+           NÚT NỔI
+        ========================= */
+
+        .floating-button {
+            position: fixed;
+
+            right: 25px;
+            bottom: 25px;
+
+            width: 60px;
+            height: 60px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: linear-gradient(
+                135deg,
+                #21b8ff,
+                #703cff
+            );
+
+            color: white;
+
+            font-size: 25px;
+
+            text-decoration: none;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.4);
+
+            z-index: 10;
+
+            transition: 0.3s;
+        }
+
+        .floating-button:hover {
+            transform: scale(1.15) rotate(10deg);
+
+            box-shadow:
+                0 0 35px #21b8ff;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            text-align: center;
+
+            padding: 35px 20px;
+
+            color: #aeb9e5;
+
+            border-top:
+                1px solid rgba(255,255,255,0.1);
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                min-height: 280px;
+            }
+
+            main {
+                padding: 50px 15px;
+            }
+
+            .floating-text {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- TEXT NỔI TRANG TRÍ -->
+
+    <div class="floating-text one">
+        LEARN
+    </div>
+
+    <div class="floating-text two">
+        DIGITAL
+    </div>
+
+    <div class="floating-text three">
+        CREATE • LEARN • SHARE
+    </div>
+
+
+    <!-- HEADER -->
+
+    <header>
+
+        <div class="badge">
+            ✦ DIGITAL EDUCATION
+        </div>
+
+        <h1>
+            Công Nghệ Số Trong Học Tập
+        </h1>
+
+        <p>
+            Khám phá cách công nghệ số giúp việc học trở nên
+            linh hoạt, tương tác, cá nhân hóa và kết nối hơn.
+        </p>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main>
+
+        <!-- GIỚI THIỆU -->
+
+        <section>
+
+            <div class="section-title">
+
+                <h2>
+                    🚀 Công nghệ thay đổi cách học
+                </h2>
+
+                <p>
+                    Một số lợi ích nổi bật của công nghệ số trong giáo dục
+                </p>
+
+            </div>
+
+
+            <div class="cards">
+
+                <div class="card blue">
+
+                    <div class="icon">
+                        🌎
+                    </div>
+
+                    <h3>
+                        Học mọi lúc, mọi nơi
+                    </h3>
+
+                    <p>
+                        Người học có thể tiếp cận tài liệu,
+                        khóa học và kiến thức trực tuyến
+                        ở bất kỳ đâu chỉ với một thiết bị có Internet.
+                    </p>
+
+                </div>
+
+
+                <div class="card orange">
+
+                    <div class="icon">
+                        🤖
+                    </div>
+
+                    <h3>
+                        Học tập cá nhân hóa
+                    </h3>
+
+                    <p>
+                        AI và các nền tảng số có thể hỗ trợ
+                        người học tìm kiếm nội dung phù hợp
+                        với nhu cầu và tiến độ của mình.
+                    </p>
+
+                </div>
+
+
+                <div class="card green">
+
+                    <div class="icon">
+                        🌐
+                    </div>
+
+                    <h3>
+                        Kết nối & hợp tác
+                    </h3>
+
+                    <p>
+                        Các công cụ trực tuyến giúp học sinh,
+                        sinh viên dễ dàng trao đổi, làm việc nhóm
+                        và chia sẻ kiến thức.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- INFOGRAPHIC -->
+
+        <section class="infographic-section">
+
+            <div class="section-title">
+
+                <h2>
+                    📊 Infographic
+                </h2>
+
+                <p>
+                    Tổng hợp những lợi ích của công nghệ số trong học tập
+                </p>
+
+            </div>
+
+
+            <div class="image-box">
+
+                <div class="image-label">
+                    💡 DIGITAL LEARNING
+                </div>
+
+                <img
+                    src="Lab05_Ex2.1.png"
+                    alt="Infographic Công nghệ số trong học tập"
+                >
+
+            </div>
+
+        </section>
+
+
+        <!-- VIDEO -->
+
+        <section class="video-section">
+
+            <div class="section-title">
+
+                <h2>
+                    🎬 Video tìm hiểu thêm
+                </h2>
+
+                <p>
+                    Xem video để tìm hiểu thêm về công nghệ số trong học tập
+                </p>
+
+            </div>
+
+
+            <div class="video-container">
+
+                <div class="video-inner">
+
+                <div style="text-align: center; width: 100%;">
+                  <a href="https://youtu.be/dAvxywZpBJo" target="_blank" rel="noopener noreferrer" class="video-card-link" style="display: block; text-decoration: none;">
+                    <!-- Ảnh Thumbnail -->
+                    <img 
+                      src="https://img.youtube.com/vi/Dr3LsZiF5QU/maxresdefault.jpg" 
+                      alt="Xem video trên YouTube" 
+                      style="width: 100%; height: auto; border-radius: 12px; display: block;"
+                    >
+                    
+                    <!-- Dòng chữ cách điệu -->
+                    <p style="margin-top: 16px; color: #a855f7; font-size: 15px; font-weight: 600; letter-spacing: 0.5px; display: inline-flex; align-items: center; gap: 8px; background: rgba(168, 85, 247, 0.1); padding: 8px 18px; border-radius: 20px; border: 1px solid rgba(168, 85, 247, 0.3);">
+                      <span>🎬</span> Click vào đây để mở video trên YouTube ↗
+                    </p>
+                  </a>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- NÚT CUỘN LÊN -->
+
+    <a
+        href="#"
+        class="floating-button"
+        title="Lên đầu trang">
+        ↑
+    </a>
+
+
+    <!-- FOOTER -->
+
+
+    <footer style="text-align: center; margin-top: 40px; padding: 20px 0; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+  <p style="color: #94a3b8; font-size: 13px; font-weight: 400; margin: 0; display: inline-flex; align-items: center; gap: 6px;">
+    <span>✨</span> Nội dung và mã nguồn được hỗ trợ bởi 
+    <strong style="color: #c084fc; font-weight: 600;">Google Gemini AI</strong>
+  </p>
+        <br>
+        <strong>
+            Công Nghệ Số Trong Học Tập
+        </strong>
+
+        <br>
+
+        Thiết kế infographic & website học tập
+
+    </footer>
+
+</body>
+</html>
