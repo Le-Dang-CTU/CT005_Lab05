@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Trang Giới Thiệu Cá Nhân & Sản Phẩm</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at 20% 20%, #263f9b 0%, transparent 30%),
+                radial-gradient(circle at 80% 70%, #7026a8 0%, transparent 30%),
+                #080d29;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* TEXT NỔI TRANG TRÍ */
+        .floating-text {
+            position: fixed;
+            font-weight: bold;
+            opacity: 0.12;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatText 8s ease-in-out infinite;
+        }
+
+        .floating-text.one {
+            top: 15%;
+            left: 3%;
+            font-size: 45px;
+        }
+
+        .floating-text.two {
+            top: 55%;
+            right: 3%;
+            font-size: 35px;
+            animation-delay: 2s;
+        }
+
+        .floating-text.three {
+            bottom: 10%;
+            left: 10%;
+            font-size: 28px;
+            animation-delay: 4s;
+        }
+
+        @keyframes floatText {
+            0%, 100% {
+                transform: translateY(0) rotate(-3deg);
+            }
+            50% {
+                transform: translateY(-25px) rotate(3deg);
+            }
+        }
+
+        /* HEADER & GIỚI THIỆU CÁ NHÂN */
+        header {
+            position: relative;
+            z-index: 2;
+            min-height: 380px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 50px 20px;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(67, 97, 238, 0.95),
+                    rgba(93, 48, 170, 0.9)
+                );
+            overflow: hidden;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            margin-bottom: 15px;
+            object-fit: cover;
+            position: relative;
+            z-index: 2;
+        }
+
+        .badge {
+            position: relative;
+            z-index: 2;
+            padding: 8px 20px;
+            border-radius: 50px;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.35);
+            backdrop-filter: blur(10px);
+            font-size: 14px;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        header h1 {
+            position: relative;
+            z-index: 2;
+            margin: 0 0 10px 0;
+            font-size: clamp(32px, 5vw, 60px);
+            background: linear-gradient(90deg, white, #b7f0ff, white);
+            background-size: 200% auto;
+            color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
+            animation: shine 4s linear infinite;
+        }
+
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        header p {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #e5ebff;
+            margin: 5px 0;
+        }
+
+        /* MAIN */
+        main {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: auto;
+            padding: 60px 25px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #b9c3e8;
+        }
+
+        /* DANH SÁCH SẢN PHẨM */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            padding: 25px;
+            backdrop-filter: blur(15px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .product-badge {
+            display: inline-block;
+            align-self: flex-start;
+            padding: 5px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .pdf-badge { background: #ff4757; color: white; }
+        .png-badge { background: #2ed573; color: white; }
+        .video-badge { background: #ff6b81; color: white; }
+
+        .product-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 20px;
+        }
+
+        .product-card p {
+            color: #ccd4f4;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .product-preview {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            background: #000;
+        }
+
+        .product-preview img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .btn-link {
+            display: inline-block;
+            text-align: center;
+            padding: 10px 18px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #21b8ff, #703cff);
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .btn-link:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+
+        /* CHI TIẾT SẢN PHẨM KHUNG LỚN */
+        .detail-section {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .detail-section h3 {
+            margin-top: 0;
+            font-size: 24px;
+            color: #21b8ff;
+        }
+
+        .pdf-container {
+            width: 100%;
+            height: 500px;
+            border-radius: 12px;
+            border: none;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #aeb9e5;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            .floating-text {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- TEXT NỔI TRANG TRÍ -->
+    <div class="floating-text one">PORTFOLIO</div>
+    <div class="floating-text two">PROFILE</div>
+    <div class="floating-text three">CREATIVE • DIGITAL</div>
+
+    <!-- HEADER: GIỚI THIỆU CÁ NHÂN -->
+    <header>
+        <div class="badge">✦ TRANG CÁ NHÂN</div>
+        <h1>Đoàn Lê Đăng</h1>
+        <p><strong>Chuyên ngành:</strong> Công Nghệ Thông Tin </p>
+        <p><strong>MSSV:</strong> B2605410 | <strong>Lớp:</strong> DI26D2A1</p>
+        <p>Chào mừng bạn đến với trang giới thiệu bản thân và bộ sưu tập các sản phẩm truyền thông số đã thực hiện.</p>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+
+        <div class="section-title">
+            <h2>🚀 Sản Phẩm Đã Thực Hiện</h2>
+            <p>Dưới đây là 3 sản phẩm nổi bật bao gồm Tài liệu PDF, Infographic PNG và Video YouTube</p>
+        </div>
+
+        <!-- LƯỚI TỔNG QUAN 3 SẢN PHẨM -->
+        <div class="products-grid">
+
+            <!-- SẢN PHẨM 1: FILE PDF -->
+            <div class="product-card">
+                <div>
+                    <span class="product-badge pdf-badge">📄 FILE PDF</span>
+                    <h3>Bài Viết: Ứng Dụng Công Nghệ Số</h3>
+                    <p>Tài liệu tổng hợp và phân tích vai trò của các công cụ công nghệ số trong việc đổi mới phương pháp học tập hiện đại.</p>
+                </div>
+                <a href="#pdf-section" class="btn-link">Xem Tài Liệu PDF ↓</a>
+            </div>
+
+            <!-- SẢN PHẨM 2: FILE PNG -->
+            <div class="product-card">
+                <div>
+                    <span class="product-badge png-badge">🖼️ FILE PNG</span>
+                    <h3>Infographic Học Tập Số</h3>
+                    <p>Hình ảnh đồ họa trình bày trực quan các lợi ích cốt lõi: Học mọi lúc mọi nơi, cá nhân hóa và kết nối toàn cầu.</p>
+                </div>
+                <a href="#png-section" class="btn-link">Xem Infographic PNG ↓</a>
+            </div>
+
+            <!-- SẢN PHẨM 3: VIDEO YOUTUBE -->
+            <div class="product-card">
+                <div>
+                    <span class="product-badge video-badge">🎬 VIDEO YOUTUBE</span>
+                    <h3>Video Tham Khảo</h3>
+                    <p>Video clips tổng hợp chi tiết nội dung bổ trợ cho chuyên đề Công nghệ số trong học tập.</p>
+                </div>
+                <a href="#youtube-section" class="btn-link">Xem Video YouTube ↓</a>
+            </div>
+
+        </div>
+
+        <!-- CHI TIẾT SẢN PHẨM 1: PDF -->
+        <section id="pdf-section" class="detail-section">
+            <h3>1. Tài Liệu PDF</h3>
+            <iframe class="pdf-container" src="Lab05_Ex1.1.pdf" type="application/pdf">
+                <p>Trình duyệt của bạn không hỗ trợ xem PDF trực tiếp. <a href="Lab05_Ex1.1.pdf" target="_blank" style="color: #21b8ff;">Nhấn vào đây để tải về.</a></p>
+            </iframe>
+        </section>
+
+        <!-- CHI TIẾT SẢN PHẨM 2: PNG -->
+        <section id="png-section" class="detail-section">
+            <h3>2. Hình Ảnh Infographic</h3>
+            <div class="product-preview" style="background: transparent;">
+                <img src="Lab05_Ex2.1.png" alt="Infographic Công nghệ số trong học tập" style="border-radius: 12px; width: 100%;">
+            </div>
+        </section>
+
+        <!-- CHI TIẾT SẢN PHẨM 3: YOUTUBE VIDEO -->
+        <section id="youtube-section" class="detail-section">
+            <h3>3. Video YouTube</h3>
+            <p>Bấm vào để xem video trực tiếp</p>
+            <div class="video-container">
+                <div style="text-align: center; width: 100%;">
+                  <a href="https://youtu.be/dAvxywZpBJo" target="_blank" rel="noopener noreferrer" class="video-card-link" style="display: block; text-decoration: none;">
+                    <!-- Ảnh Thumbnail -->
+                    <img 
+                      src="https://img.youtube.com/vi/Dr3LsZiF5QU/maxresdefault.jpg" 
+                      alt="Xem video trên YouTube" 
+                      style="width: 100%; height: auto; border-radius: 12px; display: block;"
+                    >
+                    
+                    <!-- Dòng chữ cách điệu -->
+                    <p style="margin-top: 16px; color: #a855f7; font-size: 15px; font-weight: 600; letter-spacing: 0.5px; display: inline-flex; align-items: center; gap: 8px; background: rgba(168, 85, 247, 0.1); padding: 8px 18px; border-radius: 20px; border: 1px solid rgba(168, 85, 247, 0.3);">
+                      <span>🎬</span> Click vào đây để mở video trên YouTube ↗
+                    </p>
+                  </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>✨ Trang cá nhân tạo bởi <strong>Nguyễn Văn A</strong> | Mã nguồn hỗ trợ bởi <strong>Google Gemini AI</strong></p>
+    </footer>
+
+</body>
+</html>
